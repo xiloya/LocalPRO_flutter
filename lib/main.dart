@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:localpro/LaunchScreen.dart';
+import 'package:localpro/launchScreen.dart';
+import 'package:localpro/navbar.dart';
+import 'package:localpro/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,7 +10,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -17,7 +18,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Roboto',
       ),
-      home: LaunchScreen(),
+      initialRoute: '/launch',
+      getPages: [
+        GetPage(name: '/launch', page: () => const LaunchScreen()),
+        GetPage(name: '/signup', page: () => const SignUp()),
+        GetPage(name: '/home', page: () => const CustomBottomNavBar()),
+      ],
       debugShowCheckedModeBanner: false,
     );
   }

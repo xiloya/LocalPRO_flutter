@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:localpro/signup.dart';
+import 'package:get/get.dart';
 
 class LaunchScreen extends StatelessWidget {
+  const LaunchScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: const Color(0xFF0056B3),
       body: SafeArea(
@@ -14,30 +14,24 @@ class LaunchScreen extends StatelessWidget {
             padding: EdgeInsets.all(screenWidth * 0.05),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
               children: [
-                Column(
-                  children: [
-                    Image.asset(
-                      'assets/localpro.png',
-                      width: screenWidth * 0.5,
-                      height: screenWidth * 0.5,
-                      fit: BoxFit.contain,
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'LocalPro',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        height: 1.2,
-                      ),
-                    ),
-                  ],
+                Image.asset(
+                  'assets/localpro.png',
+                  width: screenWidth * 0.5,
+                  height: screenWidth * 0.5,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'LocalPro',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                    height: 1.2,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 Padding(
@@ -59,10 +53,7 @@ class LaunchScreen extends StatelessWidget {
                   width: screenWidth * 0.8,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignUp()),
-                      );
+                      Get.offNamed('/signup');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFF0F7FF),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'pro_model.dart';
-import 'proDetails.dart';
+import 'package:localpro/pro_model.dart';
+import 'package:localpro/proDetails.dart';
 
 class Home extends StatefulWidget {
+  const Home({super.key});
   @override
   _HomeState createState() => _HomeState();
 }
@@ -14,7 +15,6 @@ class _HomeState extends State<Home> {
   String _searchQuery = '';
   String _sortBy = 'rating';
   bool _showGrid = true;
-  int _currentIndex = 0;
 
   final List<Pro> _services = [
     Pro(
@@ -77,32 +77,29 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: 390,
-        height: 844,
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x1E120F28),
-              blurRadius: 6,
-              offset: Offset(0, 3),
-              spreadRadius: 0,
-            )
-          ],
-        ),
-        child: Column(
-          children: [
-            _buildAppBar(),
-            _buildSearchBar(),
-            _buildCategoryFilters(),
-            _buildSortingRow(),
-            Expanded(child: _buildServiceGrid()),
-            _buildBottomNavigationBar(),
-          ],
-        ),
+    return Container(
+      width: 390,
+      height: 844,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x1E120F28),
+            blurRadius: 6,
+            offset: Offset(0, 3),
+            spreadRadius: 0,
+          )
+        ],
+      ),
+      child: Column(
+        children: [
+          _buildAppBar(),
+          _buildSearchBar(),
+          _buildCategoryFilters(),
+          _buildSortingRow(),
+          Expanded(child: _buildServiceGrid()),
+        ],
       ),
     );
   }
@@ -111,15 +108,15 @@ class _HomeState extends State<Home> {
     return Container(
       height: 100,
       padding: const EdgeInsets.only(bottom: 13),
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Column(
         children: [
           AppBar(
-            title: Text('LocalPro'),
+            title: const Text('LocalPro'),
             centerTitle: true,
             actions: [
               IconButton(
-                icon: Icon(Icons.tune),
+                icon: const Icon(Icons.tune),
                 onPressed: _showSortDialog,
               ),
             ],
@@ -132,17 +129,17 @@ class _HomeState extends State<Home> {
   Widget _buildSearchBar() {
     return Container(
       height: 43,
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.only(top: 9, left: 16, right: 16, bottom: 8),
       decoration: ShapeDecoration(
-        color: Color(0xFFF3F4F6),
+        color: const Color(0xFFF3F4F6),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6),
         ),
       ),
       child: TextField(
         controller: _searchController,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Search for services...',
           border: InputBorder.none,
           icon: Icon(Icons.search, color: Color(0xFFBCC1CA)),
@@ -154,10 +151,9 @@ class _HomeState extends State<Home> {
 
   Widget _buildCategoryFilters() {
     final categories = ['All', 'Fitness', 'Beauty', 'Plumbing', 'Electrical'];
-
     return Container(
       height: 60,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -170,11 +166,11 @@ class _HomeState extends State<Home> {
               selected: _selectedCategory == category,
               onSelected: (selected) => setState(
                   () => _selectedCategory = selected ? category : 'All'),
-              selectedColor: Color(0xFF0056B3),
+              selectedColor: const Color(0xFF0056B3),
               labelStyle: TextStyle(
                 color: _selectedCategory == category
                     ? Colors.white
-                    : Color(0xFF323842),
+                    : const Color(0xFF323842),
               ),
             ),
           );
@@ -191,18 +187,18 @@ class _HomeState extends State<Home> {
         children: [
           Text(
             '${_filteredServices.length} Services Found',
-            style: TextStyle(color: Color(0xFF0056B3), fontSize: 16),
+            style: const TextStyle(color: Color(0xFF0056B3), fontSize: 16),
           ),
           Row(
             children: [
               IconButton(
                 icon: Icon(Icons.grid_view,
-                    color: _showGrid ? Color(0xFF0056B3) : Colors.grey),
+                    color: _showGrid ? const Color(0xFF0056B3) : Colors.grey),
                 onPressed: () => setState(() => _showGrid = true),
               ),
               IconButton(
                 icon: Icon(Icons.list,
-                    color: !_showGrid ? Color(0xFF0056B3) : Colors.grey),
+                    color: !_showGrid ? const Color(0xFF0056B3) : Colors.grey),
                 onPressed: () => setState(() => _showGrid = false),
               ),
             ],
@@ -216,7 +212,7 @@ class _HomeState extends State<Home> {
     return _showGrid
         ? GridView.builder(
             padding: const EdgeInsets.all(16),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
@@ -243,10 +239,10 @@ class _HomeState extends State<Home> {
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: BorderSide(color: Color(0xFFBCC1CA), width: 1),
+          side: const BorderSide(color: Color(0xFFBCC1CA), width: 1),
         ),
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -269,43 +265,43 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text(
                 pro.name,
                 style: TextStyle(
                   fontSize: isList ? 18 : 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF171A1F),
+                  color: const Color(0xFF171A1F),
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 pro.title,
                 style: TextStyle(
                   fontSize: isList ? 14 : 12,
-                  color: Color(0xFF9095A0),
+                  color: const Color(0xFF9095A0),
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(Icons.star, color: Colors.amber, size: 16),
-                  SizedBox(width: 4),
+                  const Icon(Icons.star, color: Colors.amber, size: 16),
+                  const SizedBox(width: 4),
                   Text(
                     '${pro.rating}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     '\$${pro.price}/hr',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF0056B3),
@@ -313,21 +309,21 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Color(0xFF0056B3),
+                    foregroundColor: const Color(0xFF0056B3),
                     backgroundColor: Colors.white,
-                    side: BorderSide(color: Color(0xFF0056B3)),
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                    side: const BorderSide(color: Color(0xFF0056B3)),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     'Book Now',
                     style: TextStyle(
                       fontSize: 14,
@@ -347,12 +343,12 @@ class _HomeState extends State<Home> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Sort By'),
+        title: const Text('Sort By'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             RadioListTile<String>(
-              title: Text('Rating'),
+              title: const Text('Rating'),
               value: 'rating',
               groupValue: _sortBy,
               onChanged: (value) => setState(() {
@@ -361,7 +357,7 @@ class _HomeState extends State<Home> {
               }),
             ),
             RadioListTile<String>(
-              title: Text('Price: Low to High'),
+              title: const Text('Price: Low to High'),
               value: 'price',
               groupValue: _sortBy,
               onChanged: (value) => setState(() {
@@ -370,7 +366,7 @@ class _HomeState extends State<Home> {
               }),
             ),
             RadioListTile<String>(
-              title: Text('Name'),
+              title: const Text('Name'),
               value: 'name',
               groupValue: _sortBy,
               onChanged: (value) => setState(() {
@@ -381,30 +377,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _currentIndex,
-      selectedItemColor: Color(0xFF0056B3),
-      onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-        if (index == 3) {
-          if (_services.isNotEmpty) {
-            Get.to(() => ProDetails(pro: _services.first));
-          }
-        }
-      },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-      ],
     );
   }
 }
